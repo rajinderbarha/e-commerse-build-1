@@ -3,13 +3,14 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import { ProductContext } from "../store/productContext";
 import Loader from "../ui/loader";
 import CategoryTile from "../components/CategoryTile";
+import { useNavigation } from "@react-navigation/native";
 
 
 const categoryURL = 'https://api.escuelajs.co/api/v1/categories'
 export default function CategoriesSceren() {
   // const ProdCtx = useContext(ProductContext);
   const [categories, setCategories] = useState([]);
-
+const navigation = useNavigation()
 // useEffect(() => {
 // //   if(ProdCtx.products.length > 0){
 // //     const categorieSet = new Set(ProdCtx.products.map((item) => item.category));
@@ -59,7 +60,7 @@ useEffect(() => {
     <FlatList 
       data={categories}
       numColumns={2}
-      renderItem={({ item }) => <CategoryTile text={item.name} image={item.image} />} keyExtractor={(item)=> item.id}
+      renderItem={({ item }) => <CategoryTile text={item.name} image={item.image} onPress={()=>navigation.navigate("All_Items")}/>} keyExtractor={(item)=> item.id}
     />
   
   );
